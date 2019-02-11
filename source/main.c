@@ -43,12 +43,12 @@ int kpayload(struct thread *td, struct kpayload_args* args){
 	//Reading kernel_base...
 	void* kernel_base = &((uint8_t*)__readmsr(0xC0000082))[-KERN_XFAST_SYSCALL];
 	uint8_t* kernel_ptr = (uint8_t*)kernel_base;
-	void** got_prison0 =   (void**)&kernel_ptr[0x10986a0];
-	void** got_rootvnode = (void**)&kernel_ptr[0x22c19F0];
+	void** got_prison0 =   (void**)&kernel_ptr[0x10986A0];
+	void** got_rootvnode = (void**)&kernel_ptr[0x22C19F0];
 	
 	//Resolve kernel functions...
-	int (*copyout)(const void *kaddr, void *uaddr, size_t len) = (void *)(kernel_base + 0x1ea520);
-	int (*printfkernel)(const char *fmt, ...) = (void *)(kernel_base + 0x435c70);
+	int (*copyout)(const void *kaddr, void *uaddr, size_t len) = (void *)(kernel_base + 0x1EA520);
+	int (*printfkernel)(const char *fmt, ...) = (void *)(kernel_base + 0x435C70);
 	int (*copyin)(const void *uaddr, void *kaddr, size_t len) = (void *)(kernel_base + 0x1ea600);
 
 	cred->cr_uid = 0;
