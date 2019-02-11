@@ -52,7 +52,6 @@ int kpayload(struct thread *td, struct kpayload_args* args){
 	int (*update_vddnp)(unsigned int cu) = (void *)(kernel_base + 0x4D2AA0);
 	int (*set_cu_power_gate)(unsigned int cu) = (void *)(kernel_base + 0x4D2C40);
 	
-
 	cred->cr_uid = 0;
 	cred->cr_ruid = 0;
 	cred->cr_rgid = 0;
@@ -86,10 +85,9 @@ int kpayload(struct thread *td, struct kpayload_args* args){
 	void *DT_HASH_SEGMENT = (void *)(kernel_base+ 0xB1D820); // I know it's for 4.55 but I think it will works
 	memcpy(DT_HASH_SEGMENT, kexec_data, kexec_size);
 
-
 	void (*kexec_init)(void *, void *) = DT_HASH_SEGMENT;
 
-	kexec_init((void *)(kernel_base+0x435c70), NULL);
+	kexec_init((void *)(kernel_base+0x436040), NULL);
 
 	// Say hello and put the kernel base in userland to we can use later
 	printfkernel("PS4 Linux Loader for 5.05 by valentinbreiz\n");
